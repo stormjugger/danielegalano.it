@@ -116,6 +116,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=VT323&display=swap" rel="stylesheet" />
+
+<!-- Theme bootstrap: run BEFORE <style> is parsed to avoid flash of wrong theme.
+     Priority: explicit user choice (localStorage) > system preference > dark default. -->
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem('theme'); // 'light' | 'dark' | null
+    var prefersLight = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches;
+    var theme = saved || (prefersLight ? 'light' : 'dark');
+    if (theme === 'light') document.documentElement.setAttribute('data-theme','light');
+  }catch(e){}
+})();
+</script>
 <style>
 /* =========================================================
    DESIGN TOKENS
@@ -307,7 +320,8 @@ html[data-retro="1"] body::before{
    ========================================================= */
 *,*::before,*::after{ box-sizing: border-box; }
 html,body{ margin:0; padding:0; }
-html{ scroll-behavior: smooth; }
+html{ scroll-behavior: smooth; scroll-padding-top: 110px; }
+@media (max-width: 768px){ html{ scroll-padding-top: 96px; } }
 body{
   background: var(--bg);
   color: var(--fg);
@@ -449,13 +463,70 @@ html[data-theme="light"] .nav-inner{ background: rgba(245,245,241,.6); }
 @media (max-width: 768px){ .nav-links .nav-link{ display: none; } }
 
 .theme-toggle{
+  position: relative;
   width: 36px; height: 36px;
   display: grid; place-items: center;
   border: 1px solid var(--line); border-radius: 999px;
   transition: border-color var(--t), background var(--t);
+  color: var(--fg);
 }
 .theme-toggle:hover{ border-color: var(--accent); background: var(--accent-soft); }
 .theme-toggle svg{ width: 16px; height: 16px; }
+.theme-toggle .icon-sun, .theme-toggle .icon-moon{
+  position: absolute;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+/* Dark mode active → show sun ("click for light"). Light mode active → show moon. */
+.theme-toggle .icon-sun{ opacity: 1; transform: rotate(0) scale(1); }
+.theme-toggle .icon-moon{ opacity: 0; transform: rotate(-45deg) scale(.6); }
+html[data-theme="light"] .theme-toggle .icon-sun{ opacity: 0; transform: rotate(45deg) scale(.6); }
+html[data-theme="light"] .theme-toggle .icon-moon{ opacity: 1; transform: rotate(0) scale(1); }
+/* Tiny dot in corner when the theme is following the OS (no explicit user choice) */
+.theme-toggle .auto-dot{
+  position: absolute; top: 2px; right: 2px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--bg);
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+}
+.theme-toggle.is-auto .auto-dot{ opacity: 1; }
+
+/* Tooltip shown on first click/tap of the theme toggle (not on hover) */
+.theme-tip{
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: max-content;
+  max-width: 240px;
+  padding: 10px 14px;
+  font-family: var(--body);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--fg);
+  background: var(--bg-2);
+  border: 1px solid var(--accent-2-soft);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px -10px rgba(0,0,0,.4), 0 0 0 1px rgba(58,200,115,.15);
+  opacity: 0; pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+  z-index: 10;
+  white-space: normal;
+  text-align: left;
+}
+.theme-tip::before{
+  content: "";
+  position: absolute;
+  top: -5px; right: 14px;
+  width: 10px; height: 10px;
+  background: var(--bg-2);
+  border-left: 1px solid var(--accent-2-soft);
+  border-top: 1px solid var(--accent-2-soft);
+  transform: rotate(45deg);
+}
+.theme-tip.show{ opacity: 1; transform: translateY(0); }
+.theme-tip b{ color: var(--accent); font-weight: 600; }
 
 /* =========================================================
    HERO
@@ -826,12 +897,36 @@ html[data-theme="light"] .chip{ background: rgba(245,245,241,.7); }
   transform: translate(0,0);
   opacity: 0;
 }
-.frame:hover{ animation: glitchHover 1s steps(2) infinite; }
-.frame:hover::before{ opacity: .9; animation: glitchA .4s steps(2) infinite; }
-.frame:hover::after{ opacity: .9; animation: glitchB .4s steps(2) infinite; }
-@keyframes glitchA{ 0%{ transform:translate(0,0);} 50%{ transform: translate(-2px,1px);} 100%{ transform: translate(0,0);} }
-@keyframes glitchB{ 0%{ transform:translate(0,0);} 50%{ transform: translate(2px,-1px);} 100%{ transform: translate(0,0);} }
-@keyframes glitchHover{ 0%,100%{ filter: hue-rotate(0deg); } 50%{ filter: hue-rotate(-10deg); } }
+.frame:hover{ animation: glitchHover 1s steps(2) infinite, frameJump .12s steps(2) infinite; }
+.frame:hover::before{ opacity: .95; animation: glitchA .18s steps(2) infinite; }
+.frame:hover::after{ opacity: .95; animation: glitchB .18s steps(2) infinite; }
+@keyframes glitchA{
+  0%   { transform: translate(-5px,  2px); }
+  25%  { transform: translate(-3px, -1px); }
+  50%  { transform: translate(-6px,  0); }
+  75%  { transform: translate(-2px,  2px); }
+  100% { transform: translate(-5px,  2px); }
+}
+@keyframes glitchB{
+  0%   { transform: translate( 5px, -2px); }
+  25%  { transform: translate( 3px,  1px); }
+  50%  { transform: translate( 6px,  0); }
+  75%  { transform: translate( 2px, -2px); }
+  100% { transform: translate( 5px, -2px); }
+}
+@keyframes glitchHover{
+  0%,100%{ filter: hue-rotate(0deg); }
+  35%   { filter: hue-rotate(-15deg) saturate(1.4); }
+  70%   { filter: hue-rotate( 12deg) saturate(1.2); }
+}
+@keyframes frameJump{
+  0%   { transform: translate(0,    0); }
+  20%  { transform: translate(1px, -1px); }
+  40%  { transform: translate(0,    1px); }
+  60%  { transform: translate(-1px, 0); }
+  80%  { transform: translate(1px,  0); }
+  100% { transform: translate(0,    0); }
+}
 
 /* spotlight on reveal */
 .frame .spot{
@@ -1225,7 +1320,19 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
       <a href="#stats" class="nav-link">Numeri</a>
       <a href="#contact" class="nav-link">Contatti</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <!-- Sun (shown in dark mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <!-- Moon (shown in light mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+        <!-- Auto indicator: visible when theme follows the OS -->
+        <span class="auto-dot" aria-hidden="true"></span>
+        <!-- One-shot tooltip shown the first time the user toggles the theme -->
+        <span class="theme-tip" id="themeTip" role="tooltip">Tieni premuto per tornare al tema <b>di sistema</b>.</span>
       </button>
     </div>
   </div>
@@ -1614,13 +1721,72 @@ if (isTouch) document.body.classList.add('is-touch');
    THEME TOGGLE
    ========================================================= */
 const html = document.documentElement;
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) html.setAttribute('data-theme', savedTheme);
-$('#themeToggle').addEventListener('click', () => {
+const themeBtn = $('#themeToggle');
+
+function syncAutoDot(){
+  // Show the green dot when the site is following the OS preference (no explicit user choice).
+  themeBtn.classList.toggle('is-auto', !localStorage.getItem('theme'));
+}
+syncAutoDot();
+
+// Click = explicit toggle (saved to localStorage).
+themeBtn.addEventListener('click', () => {
   const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
   if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme','light');
   localStorage.setItem('theme', next);
+  syncAutoDot();
+  maybeShowThemeTip();
 });
+
+// Tooltip: show ONCE on the very first explicit theme toggle, then never again.
+function maybeShowThemeTip(){
+  if (localStorage.getItem('theme-tip-seen')) return;
+  const tip = document.getElementById('themeTip');
+  if (!tip) return;
+  tip.classList.add('show');
+  localStorage.setItem('theme-tip-seen', '1');
+  setTimeout(() => tip.classList.remove('show'), 5000);
+  // Also dismiss on next interaction anywhere
+  const dismiss = () => { tip.classList.remove('show'); document.removeEventListener('pointerdown', dismiss, true); };
+  setTimeout(() => document.addEventListener('pointerdown', dismiss, true), 0);
+}
+
+// Long-press (≥700ms) = reset to "follow system".
+(function(){
+  let timer = null, fired = false;
+  function start(e){
+    fired = false;
+    timer = setTimeout(() => {
+      fired = true;
+      localStorage.removeItem('theme');
+      const prefersLight = matchMedia('(prefers-color-scheme: light)').matches;
+      if (prefersLight) html.setAttribute('data-theme','light'); else html.removeAttribute('data-theme');
+      syncAutoDot();
+      themeBtn.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(.85)' }, { transform: 'scale(1)' }],
+        { duration: 260, easing: 'cubic-bezier(.2,.7,.2,1)' }
+      );
+    }, 700);
+  }
+  function cancel(){ clearTimeout(timer); timer = null; }
+  themeBtn.addEventListener('pointerdown', start);
+  themeBtn.addEventListener('pointerup',   cancel);
+  themeBtn.addEventListener('pointerleave',cancel);
+  themeBtn.addEventListener('pointercancel',cancel);
+  // Swallow the click that follows a long-press so it doesn't immediately re-toggle.
+  themeBtn.addEventListener('click', e => { if (fired){ e.stopImmediatePropagation(); fired = false; } }, true);
+})();
+
+// Follow OS-level dark/light switch as long as the user hasn't overridden via toggle.
+try {
+  const mq = matchMedia('(prefers-color-scheme: light)');
+  const handler = (e) => {
+    if (localStorage.getItem('theme')) return; // user has an explicit choice
+    if (e.matches) html.setAttribute('data-theme','light'); else html.removeAttribute('data-theme');
+  };
+  if (mq.addEventListener) mq.addEventListener('change', handler);
+  else if (mq.addListener) mq.addListener(handler); // Safari < 14
+} catch(e){}
 
 /* =========================================================
    NIGHT MODE (00:00 – 05:59)
@@ -2140,7 +2306,7 @@ $$('a[href^="#"]').forEach(a => {
     const tgt = document.querySelector(id);
     if (!tgt) return;
     e.preventDefault();
-    const y = tgt.getBoundingClientRect().top + window.scrollY - 10;
+    const y = tgt.getBoundingClientRect().top + window.scrollY - 100;
     window.scrollTo({top: y, behavior: prefersReduced ? 'auto' : 'smooth'});
   });
 });
