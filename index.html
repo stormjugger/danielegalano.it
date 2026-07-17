@@ -8,9 +8,9 @@
 <meta name="color-scheme" content="dark light" />
 
 <!-- Primary SEO -->
-<title>Daniele Galano — Web Designer Freelance | UI/UX, E-commerce, Branding</title>
-<meta name="description" content="Daniele Galano, web designer freelance in Campania. UI/UX design, e-commerce (Shopify, WooCommerce), branding e consulenza digitale per aziende. Niente template, niente noia." />
-<meta name="keywords" content="web designer, web designer freelance, web designer Campania, web designer Napoli, UI UX designer, e-commerce designer, Shopify, WooCommerce, WordPress, brand identity, consulenza digitale, Daniele Galano" />
+<title>Daniele Galano — Web Designer Freelance a Sorrento | UI/UX, E-commerce, Branding</title>
+<meta name="description" content="Daniele Galano, web designer freelance a Sorrento (Penisola Sorrentina), Campania. UI/UX design, e-commerce (Shopify, WooCommerce), branding e consulenza digitale per aziende. Niente template, niente noia." />
+<meta name="keywords" content="web designer, web designer freelance, web designer Sorrento, web designer Penisola Sorrentina, web designer Campania, web designer Napoli, UI UX designer, e-commerce designer, Shopify, WooCommerce, WordPress, brand identity, consulenza digitale, Daniele Galano" />
 <meta name="author" content="Daniele Galano" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="googlebot" content="index, follow" />
@@ -28,7 +28,7 @@
 <meta property="og:locale" content="it_IT" />
 <meta property="og:url" content="https://danielegalano.it/" />
 <meta property="og:title" content="Daniele Galano — Not an Ordinary Web Designer" />
-<meta property="og:description" content="Web designer freelance: UI/UX, e-commerce, branding, consulenza digitale. Niente template. Niente noia." />
+<meta property="og:description" content="Web designer freelance a Sorrento (Penisola Sorrentina): UI/UX, e-commerce, branding, consulenza digitale. Niente template. Niente noia." />
 <meta property="og:image" content="https://danielegalano.it/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -37,7 +37,7 @@
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Daniele Galano — Not an Ordinary Web Designer" />
-<meta name="twitter:description" content="Web designer freelance: UI/UX, e-commerce, branding, consulenza digitale. Niente template. Niente noia." />
+<meta name="twitter:description" content="Web designer freelance a Sorrento (Penisola Sorrentina): UI/UX, e-commerce, branding, consulenza digitale. Niente template. Niente noia." />
 <meta name="twitter:image" content="https://danielegalano.it/og-image.jpg" />
 <meta name="twitter:image:alt" content="Daniele Galano — Web Designer Freelance" />
 
@@ -57,6 +57,7 @@
       "telephone": "+39-342-1600222",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Sorrento",
         "addressRegion": "Campania",
         "addressCountry": "IT"
       },
@@ -83,10 +84,11 @@
       "url": "https://danielegalano.it/",
       "image": "https://danielegalano.it/og-image.jpg",
       "founder": { "@id": "https://danielegalano.it/#daniele" },
-      "areaServed": { "@type": "Country", "name": "Italia" },
+      "areaServed": [ { "@type": "City", "name": "Sorrento" }, { "@type": "Place", "name": "Penisola Sorrentina" }, { "@type": "Country", "name": "Italia" } ],
       "priceRange": "€€",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Sorrento",
         "addressRegion": "Campania",
         "addressCountry": "IT"
       },
@@ -115,7 +117,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=VT323&display=swap" rel="stylesheet" />
+<!-- Fonts caricati in modo non render-blocking (preload + swap async). font-display:swap nella query. Pesi ridotti al minimo realmente usato (Inter 400/500, Space Grotesk 500/600/700, VT323). -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=VT323&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=VT323&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=VT323&display=swap" /></noscript>
 
 <!-- Theme bootstrap: run BEFORE <style> is parsed to avoid flash of wrong theme.
      Priority: explicit user choice (localStorage) > system preference > dark default. -->
@@ -233,6 +238,228 @@ html[data-retro="1"]{
   image-rendering: pixelated;
 }
 html[data-retro="1"] *{ letter-spacing: 0 !important; }
+
+/* =========================================================
+   GLITCH MODE — "Hacker compromise"
+   Triggered by spam-clicking the theme toggle (6 clicks / 2s)
+   ========================================================= */
+html[data-glitch="1"]{
+  --bg:        #0a0014;
+  --bg-2:      #1a0826;
+  --bg-3:      #14041e;
+  --fg:        #ffffff;
+  --fg-2:      #c9b3d9;
+  --line:      rgba(179,71,255,.30);
+  --accent:    #b347ff;
+  --accent-2:  #ff2d4a;
+  --accent-soft: rgba(179,71,255,.22);
+  --accent-2-soft: rgba(255,45,74,.35);
+}
+/* Cards & surfaces — deep purple glass with red-violet border */
+html[data-glitch="1"] .nav-inner,
+html[data-glitch="1"] .svc,
+html[data-glitch="1"] .stat,
+html[data-glitch="1"] .mini-stat,
+html[data-glitch="1"] .about-card,
+html[data-glitch="1"] .contact-meta,
+html[data-glitch="1"] .modal-card,
+html[data-glitch="1"] .secret-modal-card{
+  background: linear-gradient(180deg, rgba(26,8,38,.85), rgba(10,0,20,.7)) !important;
+  border-color: rgba(179,71,255,.45) !important;
+  box-shadow:
+    0 0 0 1px rgba(179,71,255,.25),
+    0 0 30px rgba(179,71,255,.20),
+    inset 0 0 20px rgba(255,45,74,.06) !important;
+}
+html[data-glitch="1"] .chip,
+html[data-glitch="1"] .svc .icon,
+html[data-glitch="1"] .frame .label-tl,
+html[data-glitch="1"] .frame .label-tr,
+html[data-glitch="1"] .frame .label-bl,
+html[data-glitch="1"] .frame .label-br{
+  background: rgba(10,0,20,.75) !important;
+  border-color: rgba(179,71,255,.4) !important;
+}
+html[data-glitch="1"] .svc .icon svg{ stroke: #b347ff !important; }
+html[data-glitch="1"] .frame{
+  background:
+    repeating-linear-gradient(45deg, rgba(179,71,255,.06) 0 2px, transparent 2px 14px),
+    rgba(10,0,20,.7) !important;
+  border-color: #b347ff !important;
+  box-shadow:
+    0 0 0 1px rgba(179,71,255,.3),
+    0 0 60px -10px rgba(255,45,74,.55) inset,
+    0 30px 120px -30px rgba(179,71,255,.5) !important;
+}
+/* Accent text & badges turn red-orange (alert) */
+html[data-glitch="1"] .index,
+html[data-glitch="1"] .badge,
+html[data-glitch="1"] .eyebrow,
+html[data-glitch="1"] .accent,
+html[data-glitch="1"] .acc,
+html[data-glitch="1"] .num{
+  color: #ff2d4a !important;
+  border-color: rgba(255,45,74,.45) !important;
+  text-shadow: 1px 0 0 rgba(179,71,255,.7), -1px 0 0 rgba(57,255,122,.6);
+}
+html[data-glitch="1"] .live::before{
+  background: #ff2d4a !important;
+  box-shadow: 0 0 0 4px rgba(255,45,74,.25) !important;
+}
+html[data-glitch="1"] .live{ color: #ff2d4a !important; }
+/* Buttons */
+html[data-glitch="1"] .btn{
+  background: rgba(10,0,20,.7) !important;
+  border-color: #b347ff !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 1px rgba(179,71,255,.35), 0 0 20px rgba(179,71,255,.4) !important;
+}
+html[data-glitch="1"] .btn.primary{
+  background: #b347ff !important;
+  color: #0a0014 !important;
+  border-color: #b347ff !important;
+}
+html[data-glitch="1"] .btn:hover{
+  box-shadow:
+    0 0 0 1px #ff2d4a,
+    0 0 25px rgba(255,45,74,.7),
+    0 0 60px -10px rgba(179,71,255,.7) !important;
+  animation: glitchJitter .12s steps(2) infinite;
+}
+/* Brand dot becomes red alarm */
+html[data-glitch="1"] .brand .dot{
+  background: #ff2d4a !important;
+  box-shadow: 0 0 0 4px rgba(255,45,74,.3) !important;
+}
+/* Headlines: permanent chromatic split */
+html[data-glitch="1"] h1,
+html[data-glitch="1"] .section-head h2,
+html[data-glitch="1"] .anti-title{
+  text-shadow:
+    2px 0 0 #ff2d4a,
+   -2px 0 0 #39ff7a,
+    0 0 14px rgba(179,71,255,.55);
+  animation: textGlitch 3.5s steps(40) infinite;
+  opacity: 1 !important;
+}
+@keyframes textGlitch{
+  0%, 92%, 100%{ transform: translate(0,0); filter: none; }
+  93%{ transform: translate(2px, 0); filter: hue-rotate(-25deg); }
+  94%{ transform: translate(-2px, 1px); }
+  95%{ transform: translate(1px, -1px); filter: hue-rotate(15deg); }
+  96%{ transform: translate(-1px, 1px); }
+  97%{ transform: translate(0,0); }
+}
+/* Cards micro-jump randomly */
+html[data-glitch="1"] .svc{ animation: cardJump 6s steps(20) infinite; }
+html[data-glitch="1"] .svc:nth-child(2){ animation-delay: -1.5s; animation-duration: 5s; }
+html[data-glitch="1"] .svc:nth-child(3){ animation-delay: -3s;   animation-duration: 7s; }
+html[data-glitch="1"] .svc:nth-child(4){ animation-delay: -4.5s; animation-duration: 4.5s; }
+html[data-glitch="1"] .stat{ animation: cardJump 5s steps(18) infinite; }
+html[data-glitch="1"] .stat:nth-child(2){ animation-delay: -2s; }
+html[data-glitch="1"] .stat:nth-child(3){ animation-delay: -1s; }
+html[data-glitch="1"] .stat:nth-child(4){ animation-delay: -3s; }
+html[data-glitch="1"] .stat:nth-child(5){ animation-delay: -2.5s; }
+html[data-glitch="1"] .stat:nth-child(6){ animation-delay: -1.5s; }
+@keyframes cardJump{
+  0%, 86%, 100%{ transform: translate(0,0); }
+  87%{ transform: translate(2px, -1px); }
+  88%{ transform: translate(-1px, 1px); }
+  89%{ transform: translate(0, 0); }
+}
+@keyframes glitchJitter{
+  0%, 100%{ transform: translate(0,0); }
+  25%{ transform: translate(1px, -1px); }
+  50%{ transform: translate(-2px, 1px); }
+  75%{ transform: translate(1px, 0); }
+}
+/* Avatar breaks: one eye red, one violet, brows offset, mouth red */
+html[data-glitch="1"] #pL{ fill: #ff2d4a !important; }
+html[data-glitch="1"] #pR{ fill: #b347ff !important; }
+html[data-glitch="1"] #mouth{ stroke: #ff2d4a !important; }
+html[data-glitch="1"] #bL{ transform: translateY(-3px); }
+html[data-glitch="1"] #bR{ transform: translateY(2px); }
+html[data-glitch="1"] .avatar{ animation: avatarShake 4s steps(30) infinite; }
+@keyframes avatarShake{
+  0%, 88%, 100%{ transform: translate(0,0); filter: none; }
+  89%{ transform: translate(3px, -2px); filter: hue-rotate(60deg); }
+  90%{ transform: translate(-2px, 1px); }
+  91%{ transform: translate(0, 0); filter: hue-rotate(-30deg); }
+  92%{ transform: translate(2px, 1px); }
+}
+/* Pixelated red cursor */
+html[data-glitch="1"] .cursor-ring{
+  border-color: #ff2d4a !important;
+  border-radius: 0 !important;
+  border-width: 2px !important;
+  mix-blend-mode: normal !important;
+}
+html[data-glitch="1"] .cursor-dot{
+  background: #ff2d4a !important;
+  border-radius: 0 !important;
+  width: 4px !important; height: 4px !important;
+}
+/* Full-page scanline sweep + red vignette */
+html[data-glitch="1"] body::before{
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background:
+    repeating-linear-gradient(0deg,
+      rgba(0,0,0,0) 0 2px,
+      rgba(0,0,0,.18) 2px 3px),
+    radial-gradient(120% 120% at 50% 50%, transparent 55%, rgba(255,45,74,.12) 100%);
+  mix-blend-mode: multiply;
+}
+html[data-glitch="1"] body::after{
+  content: "";
+  position: fixed; left: 0; right: 0;
+  top: -10%; height: 18%;
+  background: linear-gradient(180deg,
+    transparent,
+    rgba(179,71,255,.18) 50%,
+    rgba(255,45,74,.22) 70%,
+    transparent);
+  pointer-events: none;
+  z-index: 9996;
+  animation: scanSweep 4.5s linear infinite;
+  filter: blur(2px);
+}
+@keyframes scanSweep{
+  0%   { top: -20%; }
+  100% { top: 110%; }
+}
+/* Persistent glitch banner (top) */
+.glitch-banner{
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 9999;
+  display: none;
+  padding: 8px 16px;
+  background: #ff2d4a;
+  color: #0a0014;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .25em;
+  text-align: center;
+  text-transform: uppercase;
+  animation: bannerBlink 1.2s steps(2) infinite;
+  border-bottom: 2px solid #b347ff;
+}
+html[data-glitch="1"] .glitch-banner{ display: block; }
+html[data-glitch="1"] .nav{ top: 38px; }
+@keyframes bannerBlink{
+  0%, 100%{ background: #ff2d4a; color: #0a0014; }
+  50%    { background: #b347ff; color: #fff; }
+}
+/* Image rendering pixel for the cursor */
+html[data-glitch="1"] *{ image-rendering: pixelated; }
+/* Frame chromatic split forced ON even without hover */
+html[data-glitch="1"] .frame::before,
+html[data-glitch="1"] .frame::after{ opacity: .9 !important; }
+html[data-glitch="1"] .frame::before{ border-color: #ff2d4a !important; animation: glitchA .18s steps(2) infinite !important; }
+html[data-glitch="1"] .frame::after { border-color: #b347ff !important; animation: glitchB .18s steps(2) infinite !important; }
 
 /* ---- RETRO MODE: CRT phosphor cards (Option B) ---- */
 html[data-retro="1"] .nav-inner,
@@ -451,6 +678,7 @@ html[data-theme="light"] .nav-inner{ background: rgba(245,245,241,.6); }
 }
 .nav-links a{
   position: relative;
+  display: inline-flex; align-items: center; white-space: nowrap;
   transition: color var(--t);
 }
 .nav-links a::after{
@@ -461,6 +689,29 @@ html[data-theme="light"] .nav-inner{ background: rgba(245,245,241,.6); }
 .nav-links a:hover{ color: var(--fg); }
 .nav-links a:hover::after{ right: 0; }
 @media (max-width: 768px){ .nav-links .nav-link{ display: none; } }
+.nav-item{ position: relative; }
+.nav-submenu{
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(0);
+  min-width: 200px; padding: 8px; margin-top: 14px;
+  background: var(--bg-2, #161b26); border: 1px solid rgba(255,255,255,.1); border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--t), visibility var(--t);
+  z-index: 60;
+}
+.nav-submenu::before{
+  content:""; position: absolute; top: -14px; left: 0; right: 0; height: 14px;
+}
+html[data-theme="light"] .nav-submenu{ background: #fff; border-color: rgba(15,23,42,.1); }
+.nav-item:hover .nav-submenu, .nav-item:focus-within .nav-submenu{
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.nav-submenu a{
+  display: block; padding: 8px 10px; border-radius: 8px; font-size: 13px; color: var(--fg-2);
+  white-space: nowrap;
+}
+.nav-submenu a:hover{ color: var(--fg); background: rgba(58,200,115,.1); }
+.nav-submenu a::after{ display: none; }
 
 .theme-toggle{
   position: relative;
@@ -469,6 +720,8 @@ html[data-theme="light"] .nav-inner{ background: rgba(245,245,241,.6); }
   border: 1px solid var(--line); border-radius: 999px;
   transition: border-color var(--t), background var(--t);
   color: var(--fg);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .theme-toggle:hover{ border-color: var(--accent); background: var(--accent-soft); }
 .theme-toggle svg{ width: 16px; height: 16px; }
@@ -825,6 +1078,14 @@ html[data-theme="light"] .chip{ background: rgba(245,245,241,.7); }
 }
 .svc .icon svg{ width: 26px; height: 26px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
 .svc .tags{ display:flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.svc-link{ display:contents; color: inherit; text-decoration: none; }
+.svc .go{
+  font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .02em;
+  color: var(--accent); margin-top: 16px;
+  opacity: .55; transform: translateX(0);
+  transition: opacity var(--t), transform var(--t);
+}
+.svc:hover .go{ opacity: 1; transform: translateX(4px); }
 .svc .tags span{
   font-family: var(--display); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
   color: var(--fg-2);
@@ -1315,7 +1576,15 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
     <a href="#top" class="brand"><span class="dot"></span>Daniele Galano</a>
     <div class="nav-links">
       <a href="#about" class="nav-link">Chi sono</a>
-      <a href="#services" class="nav-link">Servizi</a>
+      <div class="nav-item">
+        <a href="#services" class="nav-link">Servizi <svg width="9" height="9" viewBox="0 0 9 9" fill="none" style="margin-left:3px;vertical-align:middle" aria-hidden="true"><path d="M1 2.5L4.5 6L8 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-submenu">
+          <a href="servizi/ui-ux-design/">UI/UX Design</a>
+          <a href="servizi/branding/">Branding</a>
+          <a href="servizi/e-commerce/">E-commerce</a>
+          <a href="servizi/consulenza/">Consulenza</a>
+        </div>
+      </div>
       <a href="#anti" class="nav-link">Portfolio</a>
       <a href="#stats" class="nav-link">Numeri</a>
       <a href="#contact" class="nav-link">Contatti</a>
@@ -1431,7 +1700,7 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
 
   <div class="about-grid reveal" id="aboutBlock">
     <div class="about-text">
-      <p>Mi chiamo Daniele, faccio design da dieci anni e codice da quando mio fratello mi ha mostrato le sue simpatiche creazioni. Mi piacciono le interfacce che non hanno bisogno di un tutorial, i sistemi che reggono il peso della crescita e i progetti dove il cliente dice "fai tu" — e poi lo dice davvero.</p>
+      <p>Mi chiamo Daniele, faccio design da dieci anni e codice da quando mio fratello mi ha mostrato le sue simpatiche creazioni. Mi piacciono le interfacce che non hanno bisogno di un tutorial, i sistemi che reggono il peso della crescita e i progetti dove il cliente dice "fai tu" — e poi lo dice davvero. Lavoro da <b>Sorrento</b>, in Penisola Sorrentina — sì, proprio quel Sorrento — ma i miei pixel non hanno paura di prendere il traghetto.</p>
       <p>La mia filosofia è semplice: <b>il design è una conversazione</b>, non un monologo da Behance. Lavoro con startup, PMI, agenzie e qualche privato fortunato. Disegno prima a mano, poi in Figma, poi in codice, poi mi pento di una scelta, poi torno indietro, poi pubblico. È un metodo.</p>
       <p>Ossessioni del momento: <span class="acc">griglie asimmetriche</span>, micro-interazioni che fanno sorridere, design tokens organizzati meglio della mia camera, e bottoni che hanno <b>tre stati hover</b> perché due erano pochi.</p>
 
@@ -1453,7 +1722,7 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
       <ul class="bullets">
         <li><span class="k">Stack</span><span>Wordpress, Woocommerce, ACF, Figma e tanto CSS scritto a mano</span></li>
         <li><span class="k">Lingua</span><span>Italiano (madre), Inglese (lavoro)</span></li>
-        <li><span class="k">Base</span><span>Campania - disponibile in remoto</span></li>
+        <li><span class="k">Base</span><span>Sorrento, Penisola Sorrentina — disponibile in remoto</span></li>
         <li><span class="k">Tipo</span><span>Curioso, creativo, allergico alle slide noiose</span></li>
         <li><span class="k">No</span><span>Loghi animati gratis "per visibilità"</span></li>
       </ul>
@@ -1472,6 +1741,7 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
   </div>
 
   <div class="services">
+    <a class="svc-link" href="servizi/ui-ux-design/" aria-label="UI / UX Design — vai alla pagina del servizio">
     <article class="svc reveal" data-svc>
       <div>
         <div class="num">/ 01</div>
@@ -1482,8 +1752,11 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 14h4"/></svg>
       </div>
       <div class="tags"><span>Figma</span><span>Prototipi</span><span>User Flow</span><span>A/B</span></div>
+      <div class="go">Approfondisci il servizio →</div>
     </article>
+    </a>
 
+    <a class="svc-link" href="servizi/branding/" aria-label="Branding & Identity — vai alla pagina del servizio">
     <article class="svc reveal" data-svc>
       <div>
         <div class="num">/ 02</div>
@@ -1494,8 +1767,11 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg>
       </div>
       <div class="tags"><span>Logo</span><span>Voice</span><span>Brand Book</span><span>Asset Kit</span></div>
+      <div class="go">Approfondisci il servizio →</div>
     </article>
+    </a>
 
+    <a class="svc-link" href="servizi/e-commerce/" aria-label="E-commerce — vai alla pagina del servizio">
     <article class="svc reveal" data-svc>
       <div>
         <div class="num">/ 03</div>
@@ -1506,8 +1782,11 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
         <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21 8H7"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg>
       </div>
       <div class="tags"><span>Shopify</span><span>WooCommerce</span><span>Checkout</span><span>CRO</span></div>
+      <div class="go">Approfondisci il servizio →</div>
     </article>
+    </a>
 
+    <a class="svc-link" href="servizi/consulenza/" aria-label="Consulenza per Aziende — vai alla pagina del servizio">
     <article class="svc reveal" data-svc>
       <div>
         <div class="num">/ 04</div>
@@ -1518,7 +1797,9 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
         <svg viewBox="0 0 24 24"><path d="M3 20V10l9-6 9 6v10"/><path d="M3 20h18"/><path d="M9 20v-6h6v6"/></svg>
       </div>
       <div class="tags"><span>Audit</span><span>Strategia</span><span>Roadmap</span><span>Workshop</span></div>
+      <div class="go">Approfondisci il servizio →</div>
     </article>
+    </a>
   </div>
 </section>
 
@@ -1644,7 +1925,7 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
       <div class="meta-row"><span class="k">Status</span><span class="v"><span class="live">Disponibile</span></span></div>
       <div class="meta-row"><span class="k">Mail</span><span class="v">info@danielegalano.it</span></div>
       <div class="meta-row"><span class="k">Telefono</span><span class="v">+39 — chiedi via mail</span></div>
-      <div class="meta-row"><span class="k">Sede</span><span class="v">In giro per la Campania</span></div>
+      <div class="meta-row"><span class="k">Sede</span><span class="v">Sorrento, in giro per la Penisola</span></div>
       <div class="meta-row"><span class="k">Tipico</span><span class="v">Sprint 4–8 settimane</span></div>
       <div class="meta-row"><span class="k">Pessimo a</span><span class="v">Rispondere su Instagram</span></div>
     </aside>
@@ -1679,6 +1960,7 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
       <li data-on="all"><span class="label"><b>Visita di notte</b> · 00:00–05:59 modalità ultra-dark</span> <kbd>🌙</kbd></li>
       <li data-on="desktop"><span class="label"><b>Konami Code</b> · Retro Mode 8-bit</span> <kbd>↑↑↓↓←→←→BA</kbd></li>
       <li data-on="touch"><span class="label"><b>Swipe Konami</b> · Retro Mode 8-bit (al centro)</span> <kbd>↑↑↓↓←→←→</kbd></li>
+      <li data-on="all"><span class="label"><b>6 click rapidi sul tema</b> · GLITCH MODE (system compromised)</span> <kbd>×6</kbd></li>
       <li data-on="all"><span class="label"><b>Scroll velocissimo</b> · l'avatar si lamenta</span> <kbd>scroll</kbd></li>
       <li data-on="desktop"><span class="label"><b>Console del browser</b> · digita <span style="color:var(--accent)">secretPage()</span></span> <kbd>F12</kbd></li>
       <li data-on="touch"><span class="label"><b>Tieni premuto il "?"</b> qui sotto per 3s · pagina segreta</span> <kbd>hold</kbd></li>
@@ -1693,6 +1975,11 @@ body.is-touch .cheats li[data-on="desktop"]{ display: none; }
 </div>
 
 <div class="retro-toast" id="retroToast">▶ RETRO MODE ATTIVATA — premi ESC per uscire</div>
+
+<!-- Glitch mode banner (top bar) -->
+<div class="glitch-banner" id="glitchBanner" role="alert" aria-live="polite">
+  ▣ SYSTEM ERROR · DISPLAY COMPROMISED · PRESS ESC TO REBOOT · ▣
+</div>
 
 <!-- Secret page modal (replaces secretPage() alert) -->
 <div class="secret-modal" id="secretToast" role="dialog" aria-modal="true" aria-label="Pagina segreta">
@@ -1736,7 +2023,29 @@ themeBtn.addEventListener('click', () => {
   localStorage.setItem('theme', next);
   syncAutoDot();
   maybeShowThemeTip();
+  registerSpamClick();
 });
+
+// Spam-click easter egg: 6 toggles within 2s -> unlock GLITCH MODE.
+const spamClicks = [];
+function registerSpamClick(){
+  const now = performance.now();
+  spamClicks.push(now);
+  // keep only clicks within the last 2 seconds
+  while (spamClicks.length && now - spamClicks[0] > 2000) spamClicks.shift();
+  if (spamClicks.length >= 6 && html.getAttribute('data-glitch') !== '1'){
+    spamClicks.length = 0;
+    triggerGlitch();
+  }
+}
+function triggerGlitch(){
+  html.setAttribute('data-glitch','1');
+  // auto-reset after 2 minutes so it doesn't become unbearable
+  clearTimeout(window.__glitchT);
+  window.__glitchT = setTimeout(() => {
+    html.removeAttribute('data-glitch');
+  }, 120000);
+}
 
 // Tooltip: show ONCE on the very first explicit theme toggle, then never again.
 function maybeShowThemeTip(){
@@ -2072,6 +2381,7 @@ function startFrameSequence(){
     if (e.key === 'Escape') {
       close();
       if (html.getAttribute('data-retro') === '1'){ html.removeAttribute('data-retro'); $('#retroToast').classList.remove('show'); }
+      if (html.getAttribute('data-glitch') === '1'){ html.removeAttribute('data-glitch'); clearTimeout(window.__glitchT); }
     }
   });
   $('#secretQ').addEventListener('click', e => { e.preventDefault(); open(); });
@@ -2120,13 +2430,17 @@ function startFrameSequence(){
     if (Math.max(adx, ady) < MIN_DIST) return;
 
     let dir;
-    if (adx > ady){
+    // Require 2:1 dominance to count as horizontal/vertical —
+    // a sloppy diagonal swipe still resolves to its dominant axis.
+    if (adx > ady * 2){
       // horizontal — require start AND end away from screen edges
       if (sx < EDGE_GUARD || sx > innerWidth - EDGE_GUARD) return;
       if (t.clientX < EDGE_GUARD || t.clientX > innerWidth - EDGE_GUARD) return;
       dir = dx > 0 ? 'right' : 'left';
-    } else {
+    } else if (ady > adx * 2){
       dir = dy > 0 ? 'down' : 'up';
+    } else {
+      return; // too diagonal — ignore, don't break the sequence
     }
 
     if (dir === swipeSeq[s]){

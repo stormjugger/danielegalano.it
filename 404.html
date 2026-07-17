@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 — Pagina persa · Daniele Galano</title>
+<meta name="robots" content="noindex, follow" />
+<meta name="description" content="Questa pagina non esiste (o non esiste più). Ma la home sì, ed è molto più interessante." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=VT323&display=swap" rel="stylesheet" />
+
+<!-- Theme bootstrap: run BEFORE <style> to avoid flash of wrong theme. -->
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem('theme');
+    var prefersLight = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches;
+    var theme = saved || (prefersLight ? 'light' : 'dark');
+    if (theme === 'light') document.documentElement.setAttribute('data-theme','light');
+  }catch(e){}
+})();
+</script>
+
+<style>
+:root{
+  --bg:#0f172a; --bg-2:#1a1f2e; --bg-3:#131a2a;
+  --accent:#3ac873; --accent-2:#017693;
+  --accent-2-soft:rgba(1,118,147,.45); --accent-soft:rgba(58,200,115,.18);
+  --fg:#f3f4f6; --fg-2:#9ca3af; --line:rgba(243,244,246,.08);
+  --display:"Space Grotesk", system-ui, sans-serif;
+  --body:"Inter", system-ui, sans-serif;
+  --mono:"VT323", monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --t-fast:180ms var(--ease); --t:300ms var(--ease);
+  --max:1240px;
+}
+html[data-theme="light"]{
+  --bg:#f5f5f1; --bg-2:#ececdf; --bg-3:#ebebde;
+  --fg:#0f172a; --fg-2:#4b5563; --line:rgba(15,23,42,.10);
+  --accent-soft:rgba(58,200,115,.22);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--body); font-size:17px; line-height:1.55;
+  min-height:100vh; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:var(--accent); text-decoration:none; }
+a:hover{ color:var(--accent); }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+::selection{ background:var(--accent); color:#0f172a; }
+
+/* Background layers — mirror the main site */
+.bg-glow{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(620px 620px at 50% 32%, rgba(58,200,115,.10), transparent 60%),
+    radial-gradient(900px 900px at calc(50% + 200px) calc(32% + 300px), rgba(1,118,147,.10), transparent 60%);
+}
+html[data-theme="light"] .bg-glow{
+  background:
+    radial-gradient(620px 620px at 50% 32%, rgba(58,200,115,.14), transparent 60%),
+    radial-gradient(900px 900px at calc(50% + 200px) calc(32% + 300px), rgba(1,118,147,.12), transparent 60%);
+}
+.bg-grid{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(circle at 50% 35%, black 0, transparent 75%);
+  -webkit-mask-image:radial-gradient(circle at 50% 35%, black 0, transparent 75%);
+}
+
+/* Nav (copied from site) */
+.nav{ position:fixed; top:18px; left:0; right:0; z-index:50; padding:0 28px; }
+.nav-inner{
+  max-width:var(--max); margin:0 auto; padding:12px 18px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(15,23,42,.55);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line); border-radius:999px;
+}
+html[data-theme="light"] .nav-inner{ background:rgba(245,245,241,.6); }
+.brand{
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--display); font-weight:700; font-size:15px; letter-spacing:.02em;
+}
+.brand .dot{
+  width:10px; height:10px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 4px rgba(58,200,115,.18); animation:pulse 2.4s var(--ease) infinite;
+}
+@keyframes pulse{ 0%,100%{ box-shadow:0 0 0 4px rgba(58,200,115,.18);} 50%{ box-shadow:0 0 0 8px rgba(58,200,115,0);} }
+.nav-links{ display:flex; gap:22px; align-items:center; font-size:14px; color:var(--fg-2); }
+.nav-links a{ position:relative; transition:color var(--t); }
+.nav-links a::after{ content:""; position:absolute; left:0; right:100%; bottom:-6px; height:1px; background:var(--accent); transition:right var(--t); }
+.nav-links a:hover{ color:var(--fg); }
+.nav-links a:hover::after{ right:0; }
+@media (max-width:768px){ .nav-links .nav-link{ display:none; } }
+
+.theme-toggle{
+  position:relative; width:36px; height:36px; display:grid; place-items:center;
+  border:1px solid var(--line); border-radius:999px;
+  transition:border-color var(--t), background var(--t); color:var(--fg);
+  touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+}
+.theme-toggle:hover{ border-color:var(--accent); background:var(--accent-soft); }
+.theme-toggle svg{ width:16px; height:16px; }
+.theme-toggle .icon-sun, .theme-toggle .icon-moon{ position:absolute; transition:opacity .35s var(--ease), transform .35s var(--ease); }
+.theme-toggle .icon-sun{ opacity:1; transform:rotate(0) scale(1); }
+.theme-toggle .icon-moon{ opacity:0; transform:rotate(-45deg) scale(.6); }
+html[data-theme="light"] .theme-toggle .icon-sun{ opacity:0; transform:rotate(45deg) scale(.6); }
+html[data-theme="light"] .theme-toggle .icon-moon{ opacity:1; transform:rotate(0) scale(1); }
+.theme-toggle .auto-dot{
+  position:absolute; top:2px; right:2px; width:7px; height:7px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 0 2px var(--bg); opacity:0; transition:opacity .25s var(--ease);
+}
+.theme-toggle.is-auto .auto-dot{ opacity:1; }
+
+/* Main */
+.shell{
+  position:relative; z-index:1; max-width:var(--max); margin:0 auto; padding:0 28px;
+}
+.wrap-404{
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:150px 28px 90px;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--display); font-size:13px; font-weight:500;
+  color:var(--accent); letter-spacing:.12em; text-transform:uppercase;
+  padding:8px 14px; border-radius:999px;
+  border:1px solid var(--accent-2-soft); background:rgba(1,118,147,.08);
+}
+.eyebrow .pip{ width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2.4s infinite; }
+
+.glitch{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(120px, 26vw, 300px); line-height:.9; letter-spacing:-.03em;
+  margin:26px 0 4px; position:relative; display:inline-block; color:var(--fg);
+}
+.glitch::before, .glitch::after{
+  content:"404"; position:absolute; inset:0; opacity:.85;
+}
+.glitch::before{ color:var(--accent); animation:glx 3.2s infinite steps(2,end); clip-path:inset(0 0 55% 0); }
+.glitch::after{ color:var(--accent-2); animation:glx 2.4s infinite reverse steps(2,end); clip-path:inset(58% 0 0 0); }
+@keyframes glx{
+  0%,92%,100%{ transform:translate(0,0); }
+  93%{ transform:translate(-4px,2px); }
+  95%{ transform:translate(5px,-2px); }
+  97%{ transform:translate(-3px,-1px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .glitch::before, .glitch::after{ animation:none; }
+  .brand .dot, .eyebrow .pip{ animation:none; }
+}
+.uri{
+  font-family:var(--mono); font-size:22px; color:var(--fg-2);
+  background:var(--bg-2); border:1px solid var(--line); border-radius:999px;
+  padding:6px 18px; display:inline-flex; align-items:center; gap:8px; margin-bottom:26px;
+}
+.uri .x{ color:var(--accent-2); }
+h1.title-404{
+  font-family:var(--display); font-weight:700;
+  font-size:clamp(34px, 5.5vw, 60px); line-height:1.02; letter-spacing:-.02em;
+  margin:0 0 18px; max-width:14ch; text-wrap:balance;
+}
+h1.title-404 .g{ color:var(--accent); }
+.lede{
+  max-width:540px; font-size:19px; color:var(--fg-2); margin:0 0 38px; text-wrap:pretty;
+}
+.lede b{ color:var(--fg); font-weight:500; }
+
+.cta-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; }
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--display); font-weight:600; font-size:15px;
+  padding:14px 22px; border-radius:999px;
+  border:1px solid var(--accent-2); background:rgba(1,118,147,.06);
+  color:var(--fg); transition:transform var(--t-fast), box-shadow var(--t), background var(--t), border-color var(--t), color var(--t);
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn.primary{ background:var(--accent); border-color:var(--accent); color:#0a1020; }
+.btn.primary:hover{ box-shadow:0 10px 30px -8px rgba(58,200,115,.6), 0 0 80px -10px rgba(58,200,115,.55); }
+.btn.ghost{ background:transparent; border-color:var(--line); }
+.btn.ghost:hover{ border-color:var(--fg-2); background:transparent; color:var(--fg-2); }
+
+.quick{
+  margin-top:40px; display:flex; flex-wrap:wrap; gap:10px 8px; align-items:center; justify-content:center;
+  font-size:14px; color:var(--fg-2);
+}
+.quick .lbl{ font-family:var(--mono); font-size:17px; letter-spacing:.04em; }
+.quick a{
+  color:var(--fg); border:1px solid var(--line); border-radius:999px; padding:6px 14px;
+  transition:border-color var(--t), color var(--t), background var(--t);
+}
+.quick a:hover{ border-color:var(--accent); color:var(--accent); background:var(--accent-soft); }
+
+/* Footer (copied from site) */
+footer{ border-top:1px solid var(--line); padding:40px 0; position:relative; z-index:1; }
+.foot{
+  max-width:var(--max); margin:0 auto; padding:0 28px;
+  display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap;
+  font-size:13px; color:var(--fg-2);
+}
+.foot .mid{ text-align:center; white-space:nowrap; }
+.foot .mid b{ color:var(--fg); font-weight:500; }
+.foot a{ transition:color var(--t); }
+.foot a:hover{ color:var(--accent); }
+.foot .left b{ font-family:var(--display); color:var(--fg); font-weight:600; }
+.foot .right{ text-align:right; }
+@media (max-width:768px){
+  .foot{ justify-content:center; text-align:center; }
+  .foot .right{ text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Principale">
+  <div class="nav-inner">
+    <a href="/#top" class="brand"><span class="dot"></span>Daniele Galano</a>
+    <div class="nav-links">
+      <a href="/#about" class="nav-link">Chi sono</a>
+      <a href="/#services" class="nav-link">Servizi</a>
+      <a href="/#anti" class="nav-link">Portfolio</a>
+      <a href="/#contact" class="nav-link">Contatti</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+        <span class="auto-dot" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 404 -->
+<main class="shell">
+  <div class="wrap-404">
+    <span class="eyebrow"><span class="pip"></span>ERRORE 404</span>
+
+    <div class="glitch" aria-hidden="true">404</div>
+
+    <div class="uri"><span class="x">✕</span> pagina<span style="opacity:.5">/</span>che<span style="opacity:.5">/</span>non<span style="opacity:.5">/</span>esiste</div>
+
+    <h1 class="title-404">Questa pagina si è <span class="g">persa</span>. Come i template noiosi.</h1>
+
+    <p class="lede">
+      Hai trovato un link rotto, hai digitato male, oppure stai curiosando dove non c'è niente. <b>Non è colpa tua</b> (probabilmente). In ogni caso: qui non c'è nulla, ma la home è molto più interessante.
+    </p>
+
+    <div class="cta-row">
+      <a href="/" class="btn primary">← Riportami alla home</a>
+      <a href="/#contact" class="btn ghost">Segnala il problema →</a>
+    </div>
+
+    <div class="quick">
+      <span class="lbl">o vai dritto a:</span>
+      <a href="/#about">Chi sono</a>
+      <a href="/#services">Servizi</a>
+      <a href="/#anti">Portfolio</a>
+      <a href="/#contact">Contatti</a>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="left">
+      <b>Beh, almeno il 404 è carino.</b><br/>
+      Non tutti gli errori sono uguali.
+    </div>
+    <div class="mid">© 2026 Designed by Daniele Galano Web Designer<br/>Built with skills and imagination.</div>
+    <div class="right">
+      <a href="/#about">Chi sono</a> · <a href="/#services">Servizi</a> · <a href="/#anti">Portfolio</a> · <a href="/#contact">Contatti</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  function syncAutoDot(){
+    var hasChoice = false;
+    try{ hasChoice = !!localStorage.getItem('theme'); }catch(e){}
+    btn.classList.toggle('is-auto', !hasChoice);
+  }
+  syncAutoDot();
+  btn.addEventListener('click', function(){
+    var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    if (next === 'dark') html.removeAttribute('data-theme'); else html.setAttribute('data-theme','light');
+    try{ localStorage.setItem('theme', next); }catch(e){}
+    syncAutoDot();
+  });
+  // Follow OS changes while no explicit choice is set
+  try{
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var handler = function(e){
+      if (localStorage.getItem('theme')) return;
+      if (e.matches) html.setAttribute('data-theme','light'); else html.removeAttribute('data-theme');
+    };
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else if (mq.addListener) mq.addListener(handler);
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>

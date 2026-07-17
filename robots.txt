@@ -1,0 +1,21 @@
+# robots.txt — danielegalano.it
+# Permetti l'indicizzazione completa a tutti i crawler
+
+User-agent: *
+Allow: /
+
+# Blocca crawler AI aggressivi (rimuovi le righe se vuoi consentirli)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Sitemap
+Sitemap: https://danielegalano.it/sitemap.xml
